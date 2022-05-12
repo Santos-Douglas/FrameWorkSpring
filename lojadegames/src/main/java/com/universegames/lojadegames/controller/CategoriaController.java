@@ -1,4 +1,4 @@
-package com.universegames.lojadegamesController;
+package com.universegames.lojadegames.controller;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.universegames.lojadegamesModel.CategoriaModel;
-import com.universegames.lojadegamesRepository.CategoriaRepository;
+import com.universegames.lojadegames.model.CategoriaModel;
+import com.universegames.lojadegames.repository.CategoriaRepository;
 
 @RestController
 @RequestMapping ("/categoria")

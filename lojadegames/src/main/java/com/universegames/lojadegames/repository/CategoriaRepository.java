@@ -1,11 +1,11 @@
-package com.universegames.lojadegamesRepository;
+package com.universegames.lojadegames.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.universegames.lojadegamesModel.CategoriaModel;
+import com.universegames.lojadegames.model.CategoriaModel;
 
 @Repository
 public interface CategoriaRepository extends JpaRepository< CategoriaModel, Long> {

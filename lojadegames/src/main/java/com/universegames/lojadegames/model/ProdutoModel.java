@@ -1,4 +1,4 @@
-package com.universegames.lojadegamesModel;
+package com.universegames.lojadegames.model;
 
 import java.math.BigDecimal;
 
@@ -26,7 +26,6 @@ public class ProdutoModel {
 	@Size(min = 5 , max = 100, message = "O campo deve ter no minimo 5 caracteres e no maximo 100 caracteres")
 	public String titulo;
 	
-	/* QUE NÃO DEIXA O ESPAÇO SER VAZIO COM ESPAÇOS EX: PUBLIC STRING TEXTO */
 	@NotNull
 	public BigDecimal valor;
 	
@@ -37,9 +36,12 @@ public class ProdutoModel {
 	public Long codigo;
 	
 	@ManyToOne
-	@JsonIgnoreProperties ("produto")
-	
+	@JsonIgnoreProperties ("categoria")
 	private CategoriaModel categoria;
+	
+	@ManyToOne
+	@JsonIgnoreProperties ("usuario")
+	private Usuario usuario;
 
 	public Long getId() {
 		return id;
@@ -89,5 +91,13 @@ public class ProdutoModel {
 		this.categoria = categoria;
 	}
 
-				
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	
 }

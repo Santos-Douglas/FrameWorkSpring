@@ -1,4 +1,4 @@
-package com.universegames.lojadegamesController;
+package com.universegames.lojadegames.controller;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.universegames.lojadegamesModel.ProdutoModel;
-import com.universegames.lojadegamesRepository.ProdutosRepository;
+import com.universegames.lojadegames.model.ProdutoModel;
+import com.universegames.lojadegames.repository.ProdutosRepository;
 
 @RestController
 @RequestMapping ("/produto")

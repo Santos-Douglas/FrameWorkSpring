@@ -1,4 +1,4 @@
-package com.generation.blogpessoal.security;
+package com.universegames.lojadegames.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,11 +12,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-/*NOTAÇÃO DE SECURITY */
 @EnableWebSecurity
-public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
+public class BasicSecurityConfig extends WebSecurityConfigurerAdapter  {
 	
-	/*SERVE PARA COMPARAR OS DADOS DIGITADOS COM OS DADOS SALVOS NO BANCO DE DADOS */
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
@@ -29,15 +27,14 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 		.withUser("root")
 		.password(passwordEncoder().encode("root"))
 		.authorities("ROLE_USER");
-		
 	}
-	/* NOTAÇÃO QUE DEIXA UMA FUNÇÃO ACESSÍVEL GLOBALMENTE (EM TODA MINHA APLICAÇÃO */
+	
+	/*NOTAÇÃO QUE DEIXA UMA FUNÇÃO ACESSÍVEL GLOBALMENTE (EM TODA MINHA APLICAÇÃO */
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
-	
 	}
-
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
@@ -49,8 +46,8 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and().cors()
 		.and().csrf().disable();
-			
+		/* SERVE PARA LIBERAR ENDPOINTS ALGUNS CAMINHOS DENTRO DO CONTROLER PARA QUE O CLIENTE TENHA ACESSO SEM TER 
+		 * QUE PRECISAR PASSAR UMA CHAVE TOKEN */
 	}
-
 	
 }

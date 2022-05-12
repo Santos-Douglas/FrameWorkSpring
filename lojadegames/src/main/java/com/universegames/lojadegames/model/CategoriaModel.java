@@ -1,11 +1,10 @@
-package com.universegames.lojadegamesModel;
+package com.universegames.lojadegames.model;
 
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -13,19 +12,25 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/* FAZ O OBJETO VIRAR UMA TABELA NO BANCO DE DADOS */
+/*TABLE DA O NOME A TABELA */
 @Entity
-@Table (name = "tb_categoria")
+@Table(name = "tb_categoria") 
 public class CategoriaModel {
 
+	/*GENERATEVALUE EQUIVALENTE AO AUTO INCREMENT NO MYSQL */
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	public Long id;
-	
-	@NotBlank
+
+	/*QUE O ESPAÇO NÃO PODE SER NULL*/
+	@NotBlank 
 	public String descricao;
-	
-	@OneToMany (mappedBy = "categoria" , cascade = CascadeType.ALL )
-	@JsonIgnoreProperties ("categoria")
+
+	/* UM PARA MUITOS */
+	/*JSONIGNOREPROPERTIES USADO PARA NÃO MOSTRAR A PROPRIEDADE CATEGORIA */
+	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("categoria")
 	private List<ProdutoModel> produto;
 
 	public Long getId() {
@@ -52,6 +57,4 @@ public class CategoriaModel {
 		this.produto = produto;
 	}
 
-			
 }
-

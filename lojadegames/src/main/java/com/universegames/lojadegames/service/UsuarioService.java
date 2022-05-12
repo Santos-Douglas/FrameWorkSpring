@@ -1,4 +1,4 @@
-package com.generation.blogpessoal.service;
+package com.universegames.lojadegames.service;
 
 import java.nio.charset.Charset;
 import java.util.Optional;
@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.generation.blogpessoal.model.Usuario;
-import com.generation.blogpessoal.model.UsuarioLogin;
-import com.generation.blogpessoal.repository.UsuarioRepository;
+import com.universegames.lojadegames.model.Usuario;
+import com.universegames.lojadegames.model.UsuarioLogin;
+import com.universegames.lojadegames.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
@@ -19,7 +19,7 @@ public class UsuarioService {
 	private UsuarioRepository repository;
 	
 	/*FUNÇÃO PARA CADASTRAR UM USUARIO */
-	public Optional<Usuario>cadastraUsuario(Usuario usuario) {
+	public Optional<Usuario>cadastrarUsuario(Usuario usuario) {
 		
 		/*PRIMEIRO VALIDA SE O USUARIO É EXISTENTE NO BANCO */
 		if(repository.findByUsuario(usuario.getUsuario()).isPresent())
@@ -30,29 +30,27 @@ public class UsuarioService {
 			
 		/* E POR ULTIMO, SALVO O USUARIO COM A SENHA JÁ CRIPTOGRAFADA NO BANCO DE DADOS */
 			return Optional.of(repository.save(usuario));
-		
 	};
 	
 	public Optional<Usuario> atualizarUsuario(Usuario usuario) {
 		
 		/*PROCURAR USARIO POR ID */
 		if(repository.findById(usuario.getId()).isPresent()) {
-			
-		/*CRIPTOGRAFAR A SENHA CRIPT */
+		
+		/*CRIPTOGRAFAR A SENHA CRIPT */				
 			return Optional.of(repository.save(usuario));
 	}
-	
-		return Optional.empty();
+			return Optional.empty();
+		
 	}
-	
 	/*FUNÇÃO PARA CRIPTOGRAFAR A SENHA DIGITADA PELO USUARIO */
 	private String criptografarSenha(String senha) {
 
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
 		return encoder.encode(senha);
-
-	};
+		
+	}
 	
 	public Optional<UsuarioLogin>autenticaUsuario(Optional<UsuarioLogin> usuarioLogin) {
 		   Optional<Usuario> usuario = repository.findByUsuario(usuarioLogin.get().getUsuario());
@@ -70,16 +68,14 @@ public class UsuarioService {
 			   
 					return usuarioLogin;
 			   }
-		   }
-		   
+		  }
 		   			return Optional.empty();
-	}
-	
+		}
 	private boolean compararSenhas(String senhaDigitada, String senhaBanco) {
 		
-				BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		
-					return encoder.matches(senhaDigitada, senhaBanco);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+			return encoder.matches(senhaDigitada, senhaBanco);
 	}
 	
 	private String gerarBasicToken(String usuario, String senha) {
@@ -89,5 +85,4 @@ public class UsuarioService {
 		return "Basic " + new String(tokenBase64);
 
 	}
-
 }
